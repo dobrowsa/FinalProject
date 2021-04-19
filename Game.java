@@ -44,7 +44,7 @@ public class Game implements ActionListener {
     FileReader myFile;
 
     fileName = "triviaQuestions.txt";
-    String question = "", answer1 = "", answer2 = "", answer3 = "", answer4 = "", rightAnswer = "", userScore = "";
+    String question = "", answer1 = "", answer2 = "", answer3 = "", answer4 = "", rightAnswer = "", pointValue = "";
 
     try {
       myFile = new FileReader(fileName);
@@ -57,9 +57,9 @@ public class Game implements ActionListener {
         answer3 = reader.readLine();
         answer4 = reader.readLine();
         rightAnswer = reader.readLine();
-        userScore = reader.readLine();
+        pointValue = reader.readLine();
 
-        Question aQuestion = new Question(question, answer1, answer2, answer3, answer4, Integer.parseInt(rightAnswer), Integer.parseInt(userScore));
+        Question aQuestion = new Question(question, answer1, answer2, answer3, answer4, Integer.parseInt(rightAnswer), Integer.parseInt(pointValue));
         techQuestions.add(aQuestion);
       }
       reader.close();
@@ -81,7 +81,7 @@ public class Game implements ActionListener {
     try {
       toWriteFile = new FileWriter("score.txt");
       BufferedWriter result = new BufferedWriter(toWriteFile);
-      result.write("Player Score: " + userScore);
+      result.write("Player Score: " + pointValue);
       result.newLine();
 
       result.flush();
@@ -129,7 +129,7 @@ public class Game implements ActionListener {
     welcome = new JLabel("Welcome to this Tech Trivia Game");
     totalScore = new JLabel("Your point total score is: ");
 
-    ask = new JLabel(techQuestions.get(0).getQuestion() + "This Question is worth " + userScore + " points");
+    ask = new JLabel(techQuestions.get(0).getQuestion() + " This Question is worth " + techQuestions.get(0).getPointValue() + " points");
     answer = new JLabel("");
     correctAnswer = new JLabel("");
 
@@ -176,7 +176,7 @@ public class Game implements ActionListener {
 
       num++;
 
-      ask.setText(techQuestions.get(num).getQuestion());
+      ask.setText(techQuestions.get(num).getQuestion() + " This Question is worth " + techQuestions.get(0).getPointValue() + " points");
       answerChoice1.setText(techQuestions.get(num).getAnswer1());
       answerChoice2.setText(techQuestions.get(num).getAnswer2());
       answerChoice3.setText(techQuestions.get(num).getAnswer3());
@@ -205,25 +205,25 @@ public class Game implements ActionListener {
       if (answerChoice1.isSelected() && techQuestions.get(num).getRightAnswer() == 1) {
         answer.setText("Correct! You've earned 5 points!");
         answer.setForeground(Color.GREEN);
-        score += techQuestions.get(num).getUserScore();
+        score += techQuestions.get(num).getPointValue();
         submitButton.setVisible(false);
         nextButton.setVisible(true);
       } else if (answerChoice2.isSelected() && techQuestions.get(num).getRightAnswer() == 2) {
         answer.setText("Correct! You've earned 5 points!");
         answer.setForeground(Color.GREEN);
-        score += techQuestions.get(num).getUserScore();
+        score += techQuestions.get(num).getPointValue();
         submitButton.setVisible(false);
         nextButton.setVisible(true);
       } else if (answerChoice3.isSelected() && techQuestions.get(num).getRightAnswer() == 3) {
         answer.setText("Correct! You've earned 5 points!");
         answer.setForeground(Color.GREEN);
-        score += techQuestions.get(num).getUserScore();
+        score += techQuestions.get(num).getPointValue();
         submitButton.setVisible(false);
         nextButton.setVisible(true);
       } else if (answerChoice4.isSelected() && techQuestions.get(num).getRightAnswer() == 4) {
         answer.setText("Correct! You've earned 5 points!");
         answer.setForeground(Color.GREEN);
-        score += techQuestions.get(num).getUserScore();
+        score += techQuestions.get(num).getPointValue();
         submitButton.setVisible(false);
         nextButton.setVisible(true);
       } else {
@@ -240,7 +240,7 @@ public class Game implements ActionListener {
         group.clearSelection(); //clears the already clicked button for prior question
         NextQuestion();
         techQuestions.get(num).getRightAnswer();
-        techQuestions.get(num).getUserScore();
+        techQuestions.get(num).getPointValue();
         name.setVisible(false);
         nameField.setVisible(false);
         enterName.setVisible(false);
