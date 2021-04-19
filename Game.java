@@ -28,6 +28,7 @@ public class Game implements ActionListener{
   JRadioButton answerChoice4;
   JLabel name, welcome, ask, answer, correctAnswer, totalScore;
   JTextField nameField;
+  ButtonGroup group;
 
   int score = 0;
 
@@ -39,7 +40,6 @@ Default method to read data and create trivia game. sets up all details in the f
 */
 
 Game() {
-  int score;
   String fileName;
   FileReader myFile;
 
@@ -102,6 +102,12 @@ answerChoice2 = new JRadioButton(triviaQuestions.get(0).getAnswer2());
 answerChoice3 = new JRadioButton(triviaQuestions.get(0).getAnswer3());
 answerChoice4 = new JRadioButton(triviaQuestions.get(0).getAnswer4());
 
+group = new ButtonGroup();
+group.add(answerChoice1);
+group.add(answerChoice2);
+group.add(answerChoice3);
+group.add(answerChoice4);
+
 enterName = new JButton("Enter Game");
 submitButton = new JButton("Submit Answer");
 nextButton = new JButton("Next Question");
@@ -116,28 +122,31 @@ submitButton.addActionListener(this);
 nextButton.addActionListener(this);
 exitButton.addActionListener(this);
 
-nameField = new JTextField("Enter your name here: ");
+name = new JLabel("Enter your name here: ");
+
+nameField = new JTextField("               ");
 welcome = new JLabel("Welcome to this Tech Trivia Game");
 totalScore = new JLabel("Your point total score is: ");
 
 ask = new JLabel(triviaQuestions.get(0).getQuestion());
 answer = new JLabel("");
+correctAnswer = new JLabel("");
 
-frame.add(enterName);
-frame.add(nextButton);
-frame.add(exitButton);
-frame.add(submitButton);
-frame.add(name);
 frame.add(welcome);
+frame.add(name);
+frame.add(nameField);
 frame.add(ask);
 frame.add(answer);
 frame.add(correctAnswer);
-frame.add(totalScore);
-frame.add(nameField);
 frame.add(answerChoice1);
 frame.add(answerChoice2);
 frame.add(answerChoice3);
 frame.add(answerChoice4);
+frame.add(totalScore);
+frame.add(enterName);
+frame.add(nextButton);
+frame.add(exitButton);
+frame.add(submitButton);
 
 frame.setVisible(true);
 submitButton.setVisible(true);
@@ -215,6 +224,7 @@ public void actionPerformed(ActionEvent ae) {
   }
 
   else if (ae.getActionCommand().equals("Next Question")) {
+    group.clearSelection();//clears the already clicked button for prior question
     NextQuestion();
     triviaQuestions.get(num).getRightAnswer();
     triviaQuestions.get(num).getUserScore();

@@ -31,3 +31,5 @@ Flappy bird with a fish and coral reef
 Tetris
 T-rex hurdling cacti
 Typing speed test
+3
+5

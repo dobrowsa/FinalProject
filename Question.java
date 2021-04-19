@@ -16,14 +16,14 @@ class Question{
 /** Constructor
 * @param
 */
-Question(String aQuestion, String aAnswer1, String aAnswer2, String aAnswer3, String aAnswer4, int aRightAnswer, int aUserScore){
-  question = aQuestion;
-  aAnswer1 = answer1;
-  aAnswer2 = answer2;
-  aAnswer3 = answer3;
-  aAnswer4 = answer4;
-  rightAnswer = aRightAnswer;
-  userScore = aUserScore;
+Question(String question, String answer1, String answer2, String answer3, String answer4, int rightAnswer, int userScore){
+  this.question = question;
+  this.answer1 = answer1;
+  this.answer2 = answer2;
+  this.answer3 = answer3;
+  this.answer4 = answer4;
+  this.rightAnswer = rightAnswer;
+  this.userScore = userScore;
 }
 
 /**
